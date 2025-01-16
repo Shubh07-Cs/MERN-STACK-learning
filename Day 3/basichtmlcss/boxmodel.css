@@ -1,0 +1,17 @@
+*{
+    margin: 0;
+}
+p{
+    padding: 20px;
+    margin: 20px;
+}
+.text-1{
+    background-color: blue;
+    margin: 10px;
+    border-width: 5px;
+    border-color: red;
+    border-style: dotted;
+}
+.text-2{
+    background-color: purple;
+}

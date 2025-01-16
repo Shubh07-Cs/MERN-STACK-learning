@@ -1,0 +1,17 @@
+h2{
+    background-color: blue;
+}
+#b{
+    background-color: black;
+}
+.a{
+    text-decoration: underline;
+}
+
+h2.title-text{
+    color: lime;
+}
+
+h2.sizer{
+    font-size: 40px;
+}
