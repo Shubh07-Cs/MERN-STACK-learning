@@ -1,0 +1,18 @@
+*{
+    color: red;
+}
+p{
+    color: gold;
+}
+.text{
+    color: green;
+}
+#one{
+    color: violet;
+}
+.text-highest{
+    color: skyblue;
+}
+p.text{
+    color: brown;
+}/* the sum of p(001) and .text(010) add and specifity goes higher */

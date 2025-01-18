@@ -1,0 +1,26 @@
+*{
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+}
+.container1{
+    height: 10vh;
+    width: 50vw;
+    background-color: salmon;
+}
+.container2{
+    height: 10vh;
+    width: 50vw;
+    background-color: white;
+}
+.container3{
+    height: 10vh;
+    width: 50vw;
+    background-color: green;
+}
+.circle{   
+    /* border-radius: 10px; */
+    background-color: indigo;
+    height: 6vh;
+    width: 2vw;
+}

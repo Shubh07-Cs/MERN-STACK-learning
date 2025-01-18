@@ -1,0 +1,29 @@
+/* *{
+    padding: 0px;
+    margin: 0px;
+} */
+.text-type1{
+    background-color: lavender;
+
+}
+.text-type2{
+    background-color: green;
+    
+}
+.text-type3{
+    background-color: rebeccapurple;
+    width: 100px;
+    height: 100px;
+    padding: 25px;
+    box-sizing: border-box;
+    border: 5px solid;
+}
+
+.text-type4{
+    background-color: palegreen;
+    width: 200px;
+    height: 200px;
+    padding: 25px;
+    box-sizing: content-box;
+    border: 3px blue;
+}
