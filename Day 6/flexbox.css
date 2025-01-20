@@ -1,0 +1,45 @@
+/* .parent{
+    width: 600px;
+    height: 400px;
+    border: 2px solid red;
+    display: flex;
+    flex-direction:row;
+    justify-content: start;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+.child{
+    border: 2px solid yellow;
+    height: 200px;
+} */
+
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    
+}
+body{
+    /* display: flex; */
+    
+    background-color: blanchedalmond;
+
+}
+h1{
+    text-align: center;
+    background-color: black;
+}
+.container{
+    display: flex;
+    height: 20vh;
+    width: 50vw;
+    background-color: lightpink;
+    gap: 0.5vw;
+    justify-content: space-evenly;
+}
+.box{
+    background-color: red;
+    height: 5vh;
+    width: 4vw;
+    display: flex;
+}

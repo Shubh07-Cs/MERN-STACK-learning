@@ -1,18 +1,27 @@
-*{
+* {
     color: red;
 }
-p{
+
+p.text {
+    color: brown;
+}
+
+p {
     color: gold;
 }
-.text{
+
+.text {
     color: green;
 }
-#one{
+
+p.text#letters {
+    color: lime;
+}
+
+#letters {
     color: violet;
 }
-.text-highest{
-    color: skyblue;
+
+.text-highest {
+    color: aqua !important; /* NEVER USE IMPORTANT until its last option */
 }
-p.text{
-    color: brown;
-}/* the sum of p(001) and .text(010) add and specifity goes higher */

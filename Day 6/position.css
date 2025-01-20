@@ -1,0 +1,18 @@
+.absolute-parent{
+    width: 300px;
+    height: 300px;
+    border: 2px solid chocolate;
+    position: relative;
+}
+
+.absolute-box3{
+    width: 400px;
+    height: 200px;
+}
+h2{
+    background-color: yellow;
+    color: red;
+}
+.error-box{
+
+}
