@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 * {
     padding: 0;
     margin: 0;
@@ -21,4 +22,29 @@
     border: 10px solid grey;
     box-sizing: border-box;
     margin: 25px;
+=======
+* {
+    padding: 0;
+    margin: 0;
+}
+
+.text-type-1 {
+    background-color: lavender;
+    height: 30px;
+    width: 30px;
+    padding: 25px;
+    border: 10px solid grey;
+    box-sizing: content-box;
+    margin: 25px;
+}
+
+.text-type-2 {
+    background-color: wheat;
+    height: 100px;
+    width: 100px;
+    padding: 25px;
+    border: 10px solid grey;
+    box-sizing: border-box;
+    margin: 25px;
+>>>>>>> 03254415c8b3fa26da275a54639860aee1992c8d
 }
