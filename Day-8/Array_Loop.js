@@ -55,3 +55,59 @@ console.log("Array after copyWithin(1, 0, 2):", copyWithinArray);
 // Array fill()
 const filledArray = new Array(5).fill(0); // Creates an array filled with 0
 console.log("Filled array:", filledArray);
+
+//---------------------------------------------------------------------------------------------------------
+
+
+// Search Methods
+// Array includes()
+console.log("Array includes 5:", array.includes(5)); // Checks if 5 is in the array
+console.log("Array includes 10:", array.includes(10)); // Checks if 10 is in the array
+
+// Array indexOf()
+console.log("Index of 6:", array.indexOf(6)); // Returns the index of 6
+console.log("Index of 10:", array.indexOf(10)); // Returns -1 if not found
+
+// Array find()
+const foundElement = array.find(num => num > 5); // Finds the first element greater than 5
+console.log("First element greater than 5:", foundElement);
+
+// Array filter()
+const filteredArray = array.filter(num => num > 5); // Filters elements greater than 5
+console.log("Elements greater than 5:", filteredArray);
+
+
+//-------------------------------------------------------------------------------------------
+// Sort Methods
+// Array sort()
+const sortedArray = [...array].sort((a, b) => a - b); // Sorts the array in ascending order
+console.log("Sorted array:", sortedArray);
+
+// Array reverse()
+const reversedArray = [...array].reverse(); // Reverses the array
+console.log("Reversed array:", reversedArray);
+
+
+//-------------------------------------------------------------------------------------------
+// Iteration Methods
+// Array forEach()
+console.log("Using forEach to print elements:");
+array.forEach((item, index) => {
+    console.log(`Index ${index}: ${item}`);
+});
+
+// Array map()
+const doubledArray = array.map(num => num * 2); // Creates a new array with doubled values
+console.log("Doubled values:", doubledArray);
+
+// Array some()
+const hasEven = array.some(num => num % 2 === 0); // Checks if any element is even
+console.log("Array has even number:", hasEven);
+
+// Array every()
+const allEven = array.every(num => num % 2 === 0); // Checks if all elements are even
+console.log("All elements are even:", allEven);
+
+// Array reduce()
+const sum = array.reduce((acc, num) => acc + num, 0); // Sums all elements in the array
+console.log("Sum of elements:", sum);
