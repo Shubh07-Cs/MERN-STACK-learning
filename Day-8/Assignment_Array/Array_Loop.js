@@ -111,4 +111,3 @@ console.log("All elements are even:", allEven);
 // Array reduce()
 const sum = array.reduce((acc, num) => acc + num, 0); // Sums all elements in the array
 console.log("Sum of elements:", sum);
-
