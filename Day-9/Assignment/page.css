@@ -103,12 +103,23 @@ body{
     border-radius: 25px;
 }
 
+/* not working */
+/*
 span{
     width: 5vw;
 }
 
+hr{
+    display: block;
+    height: 1px;
+    border-top: 1px dashed black; /
+    margin: 10px 0;
+}
+*/
 
-/* For tablets (max-width: 768px) */
+
+/***
+For tablets (max-width: 768px)
 @media screen and (max-width: 768px) {
     .Nav {
         flex-direction: column;
@@ -139,7 +150,7 @@ span{
 }
 
 /* For mobile phones (max-width: 480px) */
-@media screen and (max-width: 480px) {
+/* @media screen and (max-width: 480px) {
     .Nav {
         flex-direction: column;
         padding: 4px;
@@ -178,3 +189,4 @@ span{
         width: 95%;
     }
 }
+ */
