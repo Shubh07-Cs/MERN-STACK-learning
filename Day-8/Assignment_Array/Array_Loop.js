@@ -90,13 +90,18 @@ console.log("Reversed array:", reversedArray);
 
 //-------------------------------------------------------------------------------------------
 // Iteration Methods
-// Array forEach()
+// Array forEach()--it does not return anything
+//In js, if u call a function by giving more than 3 arguments to a function which can take atmost 3 parameters, there will be no error
 console.log("Using forEach to print elements:");
 array.forEach((item, index) => {
     console.log(`Index ${index}: ${item}`);
 });
+// copyWithinArray.forEach((a,b,c)=>{
+//     console.log(a,b,c);
+// })
+//----it is used to callback.
 
-// Array map()
+// Array map()--same as foreach but use it when u want to return anything
 const doubledArray = array.map(num => num * 2); // Creates a new array with doubled values
 console.log("Doubled values:", doubledArray);
 

@@ -16,7 +16,7 @@ body{
 
 .Nav{
     border: 1px solid lightslategray;
-    padding: 8px;
+    padding: 8px 4vw;
     border-radius: 10px;
     display: flex;
     width: 92vw;
