@@ -1,0 +1,59 @@
+*{
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+}
+
+body{
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    grid-template-rows: 100px auto;
+   
+}
+
+header{
+    background-color: red;
+    
+}
+
+aside{
+    background-color: darkslategrey;
+    grid-row-start: 1;
+    grid-row-end: 3;
+}
+
+main{
+    background-color: white;
+    padding: 1rem;
+    height: calc(100vh - 100px);
+    overflow: scroll;
+}
+
+.search-result-card{
+    display: flex;
+    padding: 1rem;
+    border-radius: 0.75rem;
+    background-color: antiquewhite;
+    gap: 1rem;
+    margin: 1rem;
+}
+
+.right-part{
+    display: flex;
+    flex-direction:column ;
+    gap: 1.5rem;
+}
+
+.search-result-card img{
+    height: 200px;
+    width: 360px;
+    
+}
+
+.channel-name{
+    padding: 0.75rem 1rem;
+    border-radius: 0.6rem;
+    background-color: darkblue;
+    color: white;
+    width: fit-content;
+}
