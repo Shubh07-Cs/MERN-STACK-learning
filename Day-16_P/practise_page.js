@@ -22,21 +22,29 @@ const showProdcuts = (data)=>{
         parent.appendChild(card);
         console.log(card);
     }
-   
-
 
 };
 
-const getData = () =>{
-    const req= fetch("https://dummyjson.com/products");//request data from api
-    req.then((response) => {//then will store data
-        const pr=response.json();//
-        pr.then((data)=>{
-            showProdcuts(data);
-        })
-    }).catch((error) => {//catch will store error
-        alert(error.message);
-    });
-};
+//Then...Catch was old way of handling promises.
+//Async..AWait is the new way of handling promises.-->They are internally build on top of then...catch...(wrapper)
+
+//------------------------------------------------------------
+
+//Await actually waits for the promise to complete. Then the code after await will only execute when promise is fulfilled
+//(it does not block the call stack beacuse js can not wait for something)
+//(then code after await is given to the browser as a callback )
+
+const getData =async () =>{
+  
+    const res=await fetch("https://dummyjson.com/products");//request data from api
+    //req.then((response) => {//then will store data
+        const data=await res.json();
+      //  pr.then((data)=>{
+            showProdcuts(data);//calling data
+    }
+//     .catch((error) => {//catch will store error
+//         alert(error.message);
+//     });
+// };
 
 getData();

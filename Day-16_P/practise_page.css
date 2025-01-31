@@ -1,6 +1,8 @@
 #root{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
+    row-gap: 1rem;
+    column-gap: 1.5rem;
 }
 
 .card{
@@ -8,10 +10,10 @@
     padding: 1.25rem 2rem;
     background-color: yellow;
     color: brown;
+   
 }
 
 img{
     height: 170px;
-    row-gap: 1rem;
-    column-gap: 1.5rem;
+   
 }
