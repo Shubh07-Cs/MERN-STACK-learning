@@ -10,10 +10,15 @@ function mul( a, b){
     return a*b;
 }
 
+array=[10,100,20];
+
 const container={
     sum:sum,
     mul:mul,
+    array,
 };
+
+
 
 module.exports=container;
 
