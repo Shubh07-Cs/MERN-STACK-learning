@@ -1,101 +1,139 @@
 const express = require("express");
 const fsPromises = require("fs/promises");
-const { json } = require("stream/consumers");
 const PORT = 1010;
 
 const app = express();
 
 app.use(express.json());
 
-//read
 app.get("/", (req, res) => {
+    // DUMMY API :: to check if server is running...
     res.send(`<h1>Server is running on PORT : ${PORT}</h1>`);
 });
 
-app.get("/tasks", async (req, res) => {
-  
-    try{
-        const text = await fsPromises.readFile("./db.json");
-        const obj = JSON.parse(text); // sync process
-        res.json(obj);
-        }catch(err){
-            res.status(500);
-            res.json({
-                status : "fail",
-                message: "Internal Get server error"
-            })
-        }
-  
-});
-
-//create
+// CREATE
 app.post("/tasks", async (req, res) => {
-   
-    try{
+    try {
+        // 1. you will get the data in request
         const newObj = req.body;
-        console.log("newObj : ", newObj);
 
-    
-        //2. read the xurrent list
-        let text = await fsPromises.readFile('./db.json', 'utf-8');//reading the db file
-        if(text.length==0) text = "[]";
-        const arr = JSON.parse(text);//converting array into js array/pbjext
+        // 2. read the current list
+        let text = await fsPromises.readFile("./db.json", "utf-8");
+        if (text.length == 0) text = "[]";
+        const arr = JSON.parse(text);
 
-        //we have to generate the id
-        let newid=1;
-        if(arr.length!==0){
-            const lastTask= arr[arr.length-1];
-            newid = lastTask.id;
-            newid+=1;
+        // ------- ---------------------------------
+        // 2.1 we have to generate the id
+        let newId = 1;
+        if (arr.length !== 0) {
+            const lastTask = arr[arr.length - 1];
+            newId = lastTask.id;
+            newId += 1;
         }
 
-        //assign
-        newObj.id=newid;
-    
-        //3.then append the new data into it
+        // 2.2 assign this new id to new object
+        newObj.id = newId;
+        // ------- ---------------------------------
+
+        // 3. then append the new data into it
         arr.push(newObj);
-    
-        //4.
+
+        // 4. save the new list
         const textData = JSON.stringify(arr);
         await fsPromises.writeFile("./db.json", textData);
-    
+
+        res.status(201);
         res.json({
             status: "success",
-        })
-    }catch(err){
+        });
+    } catch (err) {
+        console.log("Error in POST TASKS: ", err.message);
         res.status(500);
         res.json({
-            status : "fail",
-            message:"Internal Post server error"
-        })
-    }
-    // frontend to backend
-    // read the current list
-    // then append the new data into it
-    // save the new list
-});
-
-//update-put(for whole document change), patch (to add something in previous)
-app.patch( "./task/:taskId",async (re1,res)=>{
-    try{
-        const {taskId} = req.params;
-
-        
-
-    }catch(err){
-        console.log(err.message);
-        res.status(500);
-        res.json({
-            status: "failed",
-
-            message: "Internal Patch Server Error",
+            status: "fail",
+            message: "Internal Server Error",
         });
     }
-    console.log(req.params);
-})
+});
 
+// READ
+app.get("/tasks", async (req, res) => {
+    try {
+        const text = await fsPromises.readFile("./db.json");
+        const obj = JSON.parse(text);
+        res.status(200);
+        res.json({
+            status: "success",
+            data: {
+                tasks: obj,
+            },
+        });
+    } catch (err) {
+        console.log("Error in GET TASKS: ", err.message);
+        res.status(500);
+        res.json({
+            status: "fail",
+            message: "Internal Server Error",
+        });
+    }
+});
 
-app.listen(PORT, async () => {
+// UPDATE
+app.patch("/tasks/:taskId", async (req, res) => {
+    try {
+        // 1. Get data from request :: body for changes &
+        // we need which data object to change :: request params in the url
+        // --> identification mark :: id
+        const { taskId } = req.params;
+        const updatedTaskInfo = req.body;
+
+        // 2. Read the current List from file
+        const text = await fsPromises.readFile("./db.json", "utf-8");
+        const arr = JSON.parse(text);
+
+        // 3. Find the data object from the array that you want to update (if valid id)
+        const foundIndex = arr.findIndex((elem) => {
+            if (elem.id == taskId) {
+                return true;
+            }
+            return false;
+        });
+
+        if (foundIndex == -1) {
+            res.status(400);
+            res.json({
+                status: "fail",
+                message: "Invalid Task Id!",
+            });
+        } else {
+            // 4. change the data that you need to
+            const oldTask = arr[foundIndex];
+            const finalNewTask = { ...oldTask, updatedTaskInfo };
+            arr[foundIndex] = finalNewTask;
+
+            // 5. save the updated List as text in the file
+            const textData = JSON.stringify(arr);
+            await fsPromises.writeFile("./db.json", textData);
+
+            res.status(200);
+            res.json({
+                status: "success",
+                data: {
+                    task: finalNewTask,
+                },
+            });
+        }
+    } catch (err) {
+        console.log("Error in PATCH TASKS: ", err.message);
+        res.status(500);
+        res.json({
+            status: "fail",
+            message: "Internal Server Error",
+        });
+    }
+});
+
+app.listen(PORT, () => {
     console.log(`
 -------------------------------------------------
 ------- Server Started on PORT : ${PORT} --------
