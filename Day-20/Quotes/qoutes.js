@@ -49,13 +49,13 @@ app.get( "/quotes", async (req , res)=>{
 //not working
 app.post("/author", async (req,res)=>{
     try{
-        const body= req.body();
-        let sayariP= await fsPromises("./quotes.json", "utf-8");
+        const body= req.body;
+        let sayariP= await fsPromises.readFile("./quotes.json", "utf-8");
 
         if(sayariP.length===0){
             sayariP="[]";
-            const sayariarrP=JSON.parse(sayariP);
         }
+        const sayariarrP=JSON.parse(sayariP);
 
         let newId=1;
         if(sayariarrP.length!==0){
