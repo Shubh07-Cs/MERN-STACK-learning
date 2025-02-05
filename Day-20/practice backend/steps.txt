@@ -1,0 +1,4 @@
+express aoo
+install mongodb::database
+install mongoose :: ODM(Object Data Mapping)
+network access-->ad ip address-->allow from anywhere
