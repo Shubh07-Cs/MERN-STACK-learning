@@ -1,0 +1,7 @@
+npm create vite@latest
+project name=.---> ignore and proceed
+Delete items in public folder, src/assets
+Delete the css in index.css
+Delete the js code in app.jsx
+npm i :: (installs all node model folders)
+npm run dev/name
