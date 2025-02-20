@@ -1,0 +1,46 @@
+/* styles.css (Updated) */
+.choose-country-container { /* Style the main container */
+    display: flex;
+    flex-direction: column; /* Align items vertically */
+    align-items: center; /* Center horizontally */
+    min-height: 100vh; /* Full viewport height */
+    padding: 20px;
+}
+
+.choose-country-container h1 {
+    margin-bottom: 20px;
+}
+
+/* ... (rest of the CSS from the previous example) ... */
+
+.country-option {
+  cursor: pointer; /* Make options clickable */
+  /* ... (rest of the styles) */
+  border: 2px solid transparent; /* Add border */
+  transition: border-color 0.3s ease; /* Smooth border transition */
+}
+
+.country-option.selected { /* Style for selected option */
+  border-color: white; /* Highlight selected option */
+}
+
+.play-button { /* Style the play button */
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #4CAF50; /* Green */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.play-button:hover {
+  background-color: #45A049; /* Darker green on hover */
+}
+
+.play-button:disabled {
+  background-color: #ccc; /* Grayed out when disabled */
+  cursor: default;
+}

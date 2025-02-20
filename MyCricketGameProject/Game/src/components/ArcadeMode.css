@@ -1,0 +1,108 @@
+.arcade-container {
+    min-height: 100vh;
+    background: linear-gradient(to bottom, #38bdf8, #0284c7);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+}
+
+.header {
+    width: 100%;
+    max-width: 1024px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.cricket-field {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+    height: 400px;
+    background-color: #d4b996;
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+
+}
+
+.pitch{
+    height:400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.batsman,
+.bowler {
+    width: 32px;
+    height: 48px;
+    border-radius: 4px;
+}
+
+.batsman {
+    background-color: #3b82f6;
+}
+
+.bowler {
+    background-color: white;
+}
+
+.ball {
+    width: 16px;
+    height: 16px;
+    background-color: red;
+    border-radius: 50%;
+    animation: bounce 0.5s infinite alternate;
+}
+
+@keyframes bounce {
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(-20px);
+    }
+}
+
+.score-options {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+    max-width: 400px;
+    width: 100%;
+}
+
+.score-button {
+    height: 96px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    border-radius: 8px;
+    transition: transform 0.2s ease-in-out;
+}
+
+.score-button:hover {
+    transform: scale(1.05);
+}
+
+.game-over-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    text-align: center;
+}

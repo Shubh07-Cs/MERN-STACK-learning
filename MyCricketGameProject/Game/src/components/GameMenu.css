@@ -1,0 +1,269 @@
+/* Main container */
+.game-menu {
+    min-height: 100vh;
+    background: linear-gradient(to bottom, #22c55e, #16a34a);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  
+  /* Header */
+  .game-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 800px;
+    margin-bottom: 20px;
+  }
+  
+  /* Logo */
+  .logo-container {
+    background: none;
+    padding: 10px;
+  }
+
+  .logo-container img { /* Target the image inside the container */
+    border-radius: 50%; /* Make the image round */
+    display: block; /* Prevents some layout issues */
+    width: 100px; /* Or whatever width you want */
+    height: 100px; /* Or whatever height you want */
+    object-fit: cover; /* Important: maintains aspect ratio and covers the circle */
+}
+
+  .logo-image {
+    width: 64px;
+    height: 32px;
+  }
+  
+  /* Help Button */
+  .help-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: white;
+    padding: 10px;
+  }
+  .icon {
+    width: 24px;
+    height: 24px;
+  }
+  
+  /* Main Game Logo */
+  .game-logo {
+    margin-bottom: 50px;
+  }
+  .logo {
+    width: 300px;
+    height: 120px;
+  }
+  
+  /* Game Modes */
+  .game-modes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    max-width: 800px;
+    width: 100%;
+  }
+  
+  .game-mode {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #e11d48;
+    color: white;
+    border-radius: 20px;
+    padding: 20px;
+    text-align: center;
+    transition: 0.3s;
+    text-decoration: none;
+  }
+  .game-mode:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Game Mode Icons */
+  .game-mode-icon {
+    width: 64px;
+    height: 64px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+  }
+  
+  /* Different Mode Colors */
+  .arcade {
+    background: #e11d48;
+  }
+  .two-player {
+    background: #0ea5e9;
+  }
+  .worldcup {
+    background: #f59e0b;
+  }
+  
+  /* Settings Button */
+  .settings-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+  }
+  .settings-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: white;
+    padding: 10px;
+  }
+  .icon-group {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem; /* Equivalent to gap-2 */
+  }
+  
+  /* Cricket ball icon container */
+  .icon-container {
+    background-color: #38bdf8; /* Tailwind bg-sky-400 */
+    border-radius: 0.5rem; /* rounded-lg */
+    padding: 0.5rem; /* p-2 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Image inside the icon */
+  .icon-container img {
+    width: 32px; /* w-8 */
+    height: 32px; /* h-8 */
+  }
+  
+  /* Help button */
+  .help-button {
+    color: white;
+    padding: 0.5rem; /* p-2 */
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  
+  /* HelpCircle icon size */
+  .icon-size {
+    width: 24px; /* w-6 */
+    height: 24px; /* h-6 */
+  }
+
+  .logo-container {
+    margin-bottom: 3rem; /* Equivalent to mb-12 */
+    text-align: center;
+  }
+  
+  /* Logo image */
+  .logo-image {
+    margin-bottom: 1rem; /* Equivalent to mb-4 */
+    max-width: 300px;
+    height: 120px;
+  }
+
+  /* styles.css */
+
+.game-categories-container {
+    display: grid;
+    grid-template-columns: 1fr; /* Default: 1 column */
+    gap: 8px;
+    max-width: 4xl; /* Or a specific pixel width */
+    width: 100%;
+    padding: 4px;
+    margin: 0 auto; /* Center the container */
+}
+
+@media (min-width: 768px) { /* Medium screens and up */
+    .game-categories-container {
+        grid-template-columns: repeat(2, 1fr); /* 3 columns on medium screens */
+    }
+}
+
+
+.game-category-link {
+    transform: scale(1); /* Initial scale */
+    transition: transform 0.3s ease; /* Smooth scaling transition */
+    display: block; /* Make the <a> fill the grid cell */
+}
+
+.game-category-link:hover {
+    transform: scale(1.05); /* Scale up on hover */
+}
+
+.game-category-card {
+    border-radius: 0.5rem; /* rounded-2xl equivalent */
+    padding: 1.5rem; /* p-6 equivalent */
+    text-align: center;
+    color: white;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -1px rgb(0 0 0 / 0.06); /* shadow-lg equivalent */
+    transition: box-shadow 0.3s ease;
+}
+
+.game-category-card:hover {
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -2px rgb(0 0 0 / 0.05); /* hover:shadow-xl equivalent */
+}
+
+.arcade-card {
+    background-color: rgb(220 38 38); /* bg-red-500 equivalent */
+}
+
+.two-player-card {
+    background-color: rgb(30 144 255); /* bg-sky-500 equivalent */
+}
+
+.world-cup-card {
+    background-color: rgb(251 191 36); /* bg-amber-500 equivalent */
+}
+
+
+.game-category-icon {
+    width: 4rem; /* w-16 equivalent */
+    height: 4rem; /* h-16 equivalent */
+    border-radius: 50%; /* rounded-full equivalent */
+    margin: 0 auto 1rem; /* mx-auto mb-4 equivalent */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: inherit; /* Inherit background from parent card */
+}
+
+.arcade-icon {
+    background-color: rgb(239 68 68); /* bg-red-400 equivalent */
+}
+
+.two-player-icon {
+    background-color: rgb(59 130 246); /* bg-sky-400 equivalent */
+}
+
+.world-cup-icon {
+    background-color: rgb(252 211 3); /* bg-amber-400 equivalent */
+}
+
+.game-category-title {
+    font-size: 1.5rem; /* text-2xl equivalent */
+    font-weight: 700; /* font-bold equivalent */
+}
+
+.settings-container {
+    position: fixed;
+    bottom: 1rem; /* bottom-4 equivalent */
+    right: 1rem; /* right-4 equivalent */
+}
+
+.settings-button {
+    color: white;
+    padding: 0.5rem; /* p-2 equivalent */
+    background: none;
+    border: none;
+    cursor: pointer;
+}
