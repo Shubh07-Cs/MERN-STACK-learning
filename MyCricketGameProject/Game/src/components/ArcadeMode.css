@@ -207,3 +207,16 @@
 .red { background-color: red; }
 .gray { background-color: gray; }
 .pink { background-color: pink; }
+
+.score-display-animation {
+    width: 40px;
+    height: 60px;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+    /*animation: bounce 0.5s ease-in-out infinite alternate; /* Reuse bounce animation */
+  }

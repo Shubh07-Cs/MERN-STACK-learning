@@ -56,7 +56,7 @@ export default function ArcadeGame() {
     let interval;
     if (!gameState.isGameOver && !gameState.isAnimating && gameState.isPointerMoving) {
       const speedIntervals = {
-        FAST: 120,   // Slightly slower than 100ms for smoother cycling
+        FAST: 110,   // Slightly slower than 100ms for smoother cycling
         MEDIUM: 200,
         SLOW: 300,
       };
@@ -116,7 +116,8 @@ export default function ArcadeGame() {
           gameResult: "OUT! Game Over",
           isAnimating: false,
         }));
-      }, 300);
+      },
+       50);
       return;
     }
 
@@ -145,7 +146,7 @@ export default function ArcadeGame() {
         ballSpeed: speeds[Math.floor(Math.random() * speeds.length)],
         isPointerMoving: !gameOver,
       }));
-    }, 300);
+    }, 50);
   };
 
   return (
@@ -166,18 +167,23 @@ export default function ArcadeGame() {
         <div className="pitch">
           <div className="batsman" style={{ backgroundColor: myTeam ? myTeam.color : "#000" }} />
           {gameState.isAnimating && (
-            <div className="ball-container">
-              <div
-                className="ball"
-                style={{
-                  animationDuration:
-                    gameState.ballSpeed === "FAST" ? "0.3s" :
-                    gameState.ballSpeed === "MEDIUM" ? "0.5s" :
-                    "0.7s"
-                }}
-              />
-            </div>
-          )}
+  <div className="ball-container">
+    <div
+      className="score-display-animation"
+      style={{
+        backgroundColor: scoreOptions[gameState.pointerPosition].color,
+        animationDuration:
+          gameState.ballSpeed === "FAST" ? "0.3s" :
+          gameState.ballSpeed === "MEDIUM" ? "0.5s" :
+          "0.7s"
+      }}
+    >
+      {scoreOptions[gameState.pointerPosition].value}
+    </div>
+  </div>
+)}
+
+
           <div className="bowler" style={{ backgroundColor: opponentTeam ? opponentTeam.color : "#fff" }} />
           {gameState.isGameOver && <div className="game-message">{gameState.gameResult}</div>}
         </div>
