@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./ChooseCountry.css";
-import "./ArcadeMode.jsx";
 
 const countries = [
   { name: "India", color: "blue", teamName: "India" },
@@ -14,40 +13,46 @@ const countries = [
   { name: "Sri Lanka", color: "royalblue", teamName: "Sri Lanka" },
 ];
 
-
 export default function ChooseCountry() {
   const [selectedCountry, setSelectedCountry] = useState(null);
   const navigate = useNavigate();
 
   const handleCountrySelect = (country) => {
     setSelectedCountry(country);
+    localStorage.setItem("selectedCountry", JSON.stringify(country));
   };
 
   const handlePlayClick = () => {
     if (selectedCountry) {
-      navigate("/arcade"); // Pass selected country in URL
+      navigate("/arcade");
     }
   };
 
   return (
     <div className="choose-country-container">
-      <h1>Choose Your Country</h1>
+      {/* Animated Cricket Ball Background Element */}
+      <div className="cricket-ball"></div>
+
+      <h1 className="title">Choose Your Cricket Nation</h1>
       <div className="country-slider-container">
         <div className="country-slider">
           {countries.map((country) => (
             <div
               key={country.name}
-              className={`country-option ${selectedCountry === country ? "selected" : ""}`}
+              className={`country-option ${country.color} ${selectedCountry === country ? "selected" : ""}`}
               onClick={() => handleCountrySelect(country)}
-              style={{ backgroundColor: country.color }} // Set color dynamically
             >
               {country.name}
             </div>
           ))}
         </div>
       </div>
-      <button className="play-button" onClick={handlePlayClick} disabled={!selectedCountry}>
-        Play
+      <button
+        className={`play-button ${selectedCountry ? "active" : ""}`}
+        onClick={handlePlayClick}
+        disabled={!selectedCountry}
+      >
+        Play Now
       </button>
     </div>
   );
