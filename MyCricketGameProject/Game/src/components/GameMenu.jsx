@@ -14,6 +14,7 @@ export default function GameMenu() {
             {/* Logo */}
             <div className="logo-container">
                 <img src="/images/628.jpg" alt="Super Over Logo" className="logo-image" />
+                Super Over
             </div>
 
 
@@ -24,7 +25,7 @@ export default function GameMenu() {
                 <Link to="/country" className="game-category-link">
                     <div className="game-category-card arcade-card">
                         <div className="game-category-icon arcade-icon">
-                            <img src="/placeholder.svg" alt="Arcade" width={32} height={32} />
+                            <img src="/images/Arcade.jpeg" alt="Arcade" width={32} height={32} />
                         </div>
                         <h2 className="game-category-title">ARCADE</h2>
                     </div>
@@ -33,7 +34,7 @@ export default function GameMenu() {
                 <Link to="/2player" className="game-category-link">
                     <div className="game-category-card two-player-card">
                         <div className="game-category-icon two-player-icon">
-                            <img src="/placeholder.svg" alt="2 Player" width={32} height={32} />
+                            <img src="/images/2Player.jpeg" alt="2 Player" width={32} height={32} />
                         </div>
                         <h2 className="game-category-title">2 PLAYER</h2>
                     </div>

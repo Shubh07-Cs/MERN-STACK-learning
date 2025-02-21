@@ -1,7 +1,9 @@
 /* Main container */
 .game-menu {
     min-height: 100vh;
-    background: linear-gradient(to bottom, #22c55e, #16a34a);
+    /* background: linear-gradient(to bottom, rgb(6, 85, 127)); */
+    background-image: url("/images/tuxpi.com.1740136384.jpg");
+    background-size:contain;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -105,9 +107,7 @@
   .two-player {
     background: #0ea5e9;
   }
-  .worldcup {
-    background: #f59e0b;
-  }
+
   
   /* Settings Button */
   .settings-container {

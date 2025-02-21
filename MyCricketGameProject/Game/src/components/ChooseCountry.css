@@ -1,30 +1,87 @@
 /* styles.css (Updated) */
 .choose-country-container { /* Style the main container */
-    display: flex;
-    flex-direction: column; /* Align items vertically */
-    align-items: center; /* Center horizontally */
-    min-height: 100vh; /* Full viewport height */
-    padding: 20px;
-}
-
-.choose-country-container h1 {
-    margin-bottom: 20px;
-}
-
-/* ... (rest of the CSS from the previous example) ... */
-
-.country-option {
+  display: flex;
+  flex-direction: column; /* Align items vertically */
+  align-items: center; /* Center horizontally */
+  min-height: 100vh; /* Full viewport height */
+  padding: 20px;
+  }
+  
+  .choose-country-container h1 {
+  margin-bottom: 20px;
+  }
+  
+  /* ... (rest of the CSS from the previous example) ... */
+  .country-slider {
+  display: flex;
+  transition: transform 0.3s ease; /* Smooth sliding transition */
+  }
+  
+  .country-option {
+  width: 200px; /* Adjust width as needed */
+  height: 100px; /* Adjust height as needed */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  color: white; /* Text color */
+  scroll-snap-align: start; /* Snap to the start of each element */
+  margin-right: 10px; /* Space between options */
+  border-radius: 10px; /* Optional: Rounded corners */
+  }
+  
+  .blue {
+  background-color: blue;
+  }
+  
+  .green {
+  background-color: green;
+  }
+  
+  .yellow {
+  background-color: yellow;
+  color: black; /* Adjust text color for yellow */
+  }
+  
+  .skyblue {
+  background-color: skyblue;
+  }
+  
+  .black {
+  background-color: black;
+  }
+  
+  .red {
+  background-color: red;
+  }
+  
+  /* Optional: Style the scrollbar (browser-specific) */
+  .country-slider-container::-webkit-scrollbar {
+  width: 8px; /* Adjust scrollbar width */
+  }
+  
+  .country-slider-container::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Scrollbar track color */
+  }
+  
+  .country-slider-container::-webkit-scrollbar-thumb {
+  background: #888; /* Scrollbar thumb color */
+  border-radius: 4px;
+  }
+  
+  
+  .country-option {
   cursor: pointer; /* Make options clickable */
   /* ... (rest of the styles) */
   border: 2px solid transparent; /* Add border */
   transition: border-color 0.3s ease; /* Smooth border transition */
-}
-
-.country-option.selected { /* Style for selected option */
+  }
+  
+  .country-option.selected { /* Style for selected option */
   border-color: white; /* Highlight selected option */
-}
-
-.play-button { /* Style the play button */
+  }
+  
+  .play-button { /* Style the play button */
   margin-top: 20px;
   padding: 10px 20px;
   background-color: #4CAF50; /* Green */
@@ -34,13 +91,13 @@
   cursor: pointer;
   font-size: 16px;
   transition: background-color 0.3s ease;
-}
-
-.play-button:hover {
+  }
+  
+  .play-button:hover {
   background-color: #45A049; /* Darker green on hover */
-}
-
-.play-button:disabled {
+  }
+  
+  .play-button:disabled {
   background-color: #ccc; /* Grayed out when disabled */
   cursor: default;
-}
+  }

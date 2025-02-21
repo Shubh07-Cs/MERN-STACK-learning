@@ -33,18 +33,23 @@ export default function ArcadeGame() {
   }, [])
 
   const initializeGame = () => {
+    const ballsRemaining = Math.floor(Math.random() * 9) + 1; // 1 to 9 balls
+    const maxPossibleScore = ballsRemaining * 6; // Maximum possible score
+    const targetScore = Math.floor(Math.random() * (maxPossibleScore - 5)) + 5; // Ensure it's < maxPossibleScore
+  
     setGameState({
-      targetScore: Math.floor(Math.random() * 21) + 10,
+      ballsRemaining,
+      targetScore,
       currentScore: 0,
-      ballsRemaining: Math.floor(Math.random() * 9) + 1,
       matchNumber: gameState.matchNumber,
       isGameOver: false,
       gameResult: "",
       ballSpeed: speeds[Math.floor(Math.random() * speeds.length)],
       selectedScore: null,
       isAnimating: false,
-    })
-  }
+    });
+  };
+  
 
   const handleScoreSelection = (score) => {
     if (gameState.isGameOver || gameState.isAnimating) return
@@ -132,7 +137,7 @@ export default function ArcadeGame() {
             onClick={() => handleScoreSelection(option.value)}
             disabled={gameState.isGameOver || gameState.isAnimating}
             className={`score-button ${option.color}`}
-            style={{ backgroundColor: `var(--${option.color})` }}
+            style={{ backgroundColor: option.color }}
           >
             {option.value}
           </button>
