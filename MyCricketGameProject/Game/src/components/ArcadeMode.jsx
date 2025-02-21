@@ -1,4 +1,5 @@
-"use client"
+// arcademode.jsx
+"use client";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./ArcadeMode.css";
@@ -38,6 +39,8 @@ export default function ArcadeGame() {
     gameResult: "",
     ballSpeed: "MEDIUM",
     isAnimating: false,
+    pointerPosition: 0,
+    isPointerMoving: false,
   });
 
   useEffect(() => {
@@ -50,74 +53,98 @@ export default function ArcadeGame() {
     initializeGame();
   }, []);
 
+  useEffect(() => {
+    let interval;
+    if (!gameState.isGameOver && !gameState.isAnimating && gameState.isPointerMoving) {
+      interval = setInterval(() => {
+        setGameState(prev => ({
+          ...prev,
+          pointerPosition: (prev.pointerPosition + 1) % scoreOptions.length
+        }));
+      }, 200);
+    }
+    return () => {
+      if (interval) clearInterval(interval);
+    };
+  }, [gameState.isGameOver, gameState.isAnimating, gameState.isPointerMoving]);
+
   const initializeGame = () => {
     const ballsRemaining = Math.floor(Math.random() * 9) + 1;
     const targetScore = Math.floor(Math.random() * (ballsRemaining * 6 - 5)) + 5;
 
-    setGameState(prev => ({
-      ...prev,
+    setGameState({
       targetScore,
       ballsRemaining,
       currentScore: 0,
+      matchNumber: 1,
       isGameOver: false,
       gameResult: "",
       ballSpeed: speeds[Math.floor(Math.random() * speeds.length)],
       isAnimating: false,
-    }));
+      pointerPosition: 0,
+      isPointerMoving: true,
+    });
   };
 
-  const handleScoreSelection = (score) => {
-    if (gameState.isGameOver || gameState.isAnimating) return;
+  const handlePointerStop = () => {
+    if (gameState.isGameOver || gameState.isAnimating || !gameState.isPointerMoving) return;
 
-    setGameState(prev => ({ ...prev, isAnimating: true }));
+    setGameState(prev => ({
+      ...prev,
+      isPointerMoving: false,
+      isAnimating: true
+    }));
 
-    setTimeout(() => {
-      if (score === "W") {
+    //Process the selected score
+    const selectedScore = scoreOptions[gameState.pointerPosition].value;
+
+    
+    if (selectedScore === "W") {
+      setTimeout(() => {
         setGameState(prev => ({
           ...prev,
           isGameOver: true,
           gameResult: "OUT! Game Over",
           isAnimating: false,
         }));
+      },300);
         return;
       }
 
-      setGameState(prev => {
-        const newScore = prev.currentScore + (score === "." ? 0 : Number(score));
-        const ballsLeft = prev.ballsRemaining - 1;
+      const newScore = gameState.currentScore + (selectedScore === "." ? 0 : Number(selectedScore));
+      const ballsLeft = gameState.ballsRemaining - 1;
 
-        let result = "";
-        let gameOver = false;
+      let result = "";
+      let gameOver = false;
 
-        if (newScore >= prev.targetScore) {
-          result = "Victory! You won!!!";
-          gameOver = true;
-        } else if (ballsLeft === 0) {
-          result = "Game Over! Target not reached";
-          gameOver = true;
-        }
+      if (newScore >= gameState.targetScore) {
+        result = "Victory! You won!!!";
+        gameOver = true;
+      } else if (ballsLeft === 0) {
+        result = "Game Over! Target not reached";
+        gameOver = true;
+      }
 
-        return {
-          ...prev,
-          currentScore: newScore,
-          ballsRemaining: ballsLeft,
-          isGameOver: gameOver,
-          gameResult: result,
-          isAnimating: false,
-          ballSpeed: speeds[Math.floor(Math.random() * speeds.length)],
-        };
-      });
-    }, 1000);
+      setTimeout(() => {
+      setGameState(prev => ({
+        ...prev,
+        currentScore: newScore,
+        ballsRemaining: ballsLeft,
+        isGameOver: gameOver,
+        gameResult: result,
+        isAnimating: false,
+        ballSpeed: speeds[Math.floor(Math.random() * speeds.length)],
+        isPointerMoving: !gameOver,
+      }));
+    }, 300);
   };
 
   return (
     <div className="arcade-container">
-      {/* Matchup Heading */}
       <h1 className="match-heading">
         {myTeam && opponentTeam ? `${myTeam.teamName} vs ${opponentTeam.teamName}` : "Loading Match..."}
       </h1>
 
-      {/* Header */}
       <div className="header">
         <Link to="/">
           <button className="home-button">🏠 Home</button>
@@ -128,42 +155,42 @@ export default function ArcadeGame() {
         </div>
       </div>
 
-      {/* Cricket Field */}
       <div className="cricket-field">
         <div className="pitch">
           <div className="batsman" style={{ backgroundColor: myTeam ? myTeam.color : "#000" }} />
           {gameState.isAnimating && <div className="ball-container"><div className="ball" /></div>}
           <div className="bowler" style={{ backgroundColor: opponentTeam ? opponentTeam.color : "#fff" }} />
-
-          {/* Display Game Message Inside Pitch */}
           {gameState.isGameOver && <div className="game-message">{gameState.gameResult}</div>}
         </div>
       </div>
 
-      {/* Game Info */}
       <div className="game-info">
         <div className="target-info">NEED: {Math.max(0, gameState.targetScore - gameState.currentScore)}</div>
         <div className="balls-info">FROM: {gameState.ballsRemaining}</div>
       </div>
 
-      {/* Speed Indicator */}
       <div className="speed-indicator">{gameState.ballSpeed}</div>
 
-      {/* Score Options */}
-      <div className="score-options">
-        {scoreOptions.map((option, index) => (
-          <button
-            key={index}
-            onClick={() => handleScoreSelection(option.value)}
-            disabled={gameState.isGameOver || gameState.isAnimating}
-            className={`score-button ${option.color}`}
-          >
-            {option.value}
-          </button>
-        ))}
+      <div className="score-options-container" onClick={handlePointerStop}>
+        <div 
+          className="pointer"
+          style={{
+            left: `${(gameState.pointerPosition * 100) / scoreOptions.length}%`,
+            width: `${100 / scoreOptions.length}%`
+          }}
+        />
+        <div className="score-options">
+          {scoreOptions.map((option, index) => (
+            <div
+              key={index}
+              className={`score-button ${option.color}`}
+            >
+              {option.value}
+            </div>
+          ))}
+        </div>
       </div>
 
-      {/* Play Again Button inside Pitch */}
       {gameState.isGameOver && (
         <div className="play-again-container">
           <button onClick={initializeGame} className="play-again-button">Play Again</button>

@@ -1,4 +1,4 @@
-/* General Container */
+/* ArcadeMode.css */
 .arcade-container {
     min-height: 100vh;
     background: linear-gradient(to bottom, #38bdf8, #0284c7);
@@ -8,7 +8,6 @@
     padding: 1rem;
 }
 
-/* Header */
 .header {
     width: 100%;
     max-width: 1024px;
@@ -18,7 +17,25 @@
     margin-bottom: 2rem;
 }
 
-/* Cricket Field */
+.home-button {
+    padding: 8px 16px;
+    font-size: 1rem;
+    background-color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.match-number {
+    color: white;
+    font-weight: bold;
+}
+
+.score-display {
+    color: white;
+    font-weight: bold;
+}
+
 .cricket-field {
     position: relative;
     width: 100%;
@@ -35,7 +52,6 @@
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-/* Pitch */
 .pitch {
     height: 100%;
     width: 100%;
@@ -46,7 +62,6 @@
     position: relative;
 }
 
-/* Players */
 .batsman,
 .bowler {
     width: 32px;
@@ -62,7 +77,6 @@
     background-color: white;
 }
 
-/* Ball Animation */
 .ball-container {
     position: absolute;
     top: 50%;
@@ -87,7 +101,6 @@
     }
 }
 
-/* Game Message Inside Pitch */
 .game-message {
     position: absolute;
     top: 50%;
@@ -100,7 +113,7 @@
     font-size: 1.5rem;
     font-weight: bold;
     text-align: center;
-    /* animation: fadeIn 0.5s ease-in-out; */
+    animation: fadeIn 0.5s ease-in-out;
 }
 
 @keyframes fadeIn {
@@ -112,7 +125,6 @@
     }
 }
 
-/* Play Again Button */
 .play-again-container {
     display: flex;
     justify-content: center;
@@ -134,7 +146,6 @@
     background-color: #ff6347;
 }
 
-/* Game Info */
 .game-info {
     display: flex;
     gap: 20px;
@@ -143,7 +154,6 @@
     color: white;
 }
 
-/* Speed Indicator */
 .speed-indicator {
     font-size: 1.2rem;
     font-weight: bold;
@@ -154,14 +164,30 @@
     margin-bottom: 10px;
 }
 
-/* Score Options */
+.score-options-container {
+    position: relative;
+    max-width: 400px;
+    width: 100%;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
 .score-options {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     gap: 8px;
-    max-width: 400px;
-    width: 100%;
-    margin-top: 10px;
+}
+
+.pointer {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.3);
+    border: 2px solid white;
+    border-radius: 8px;
+    transition: left 0.2s ease-in-out;
+    pointer-events: none;
+    z-index: 10;
 }
 
 .score-button {
@@ -169,29 +195,16 @@
     font-size: 1.5rem;
     font-weight: bold;
     border-radius: 8px;
-    transition: transform 0.2s ease-in-out, background 0.2s ease-in-out;
-    border: none;
-    cursor: pointer;
-}
-
-.score-button:hover {
-    transform: scale(1.05);
-    opacity: 0.9;
-}
-
-/* Game Over Modal (Backup if needed) */
-.game-over-modal {
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.5);
     display: flex;
     align-items: center;
     justify-content: center;
+    user-select: none;
 }
 
-.modal-content {
-    background: white;
-    padding: 2rem;
-    border-radius: 8px;
-    text-align: center;
-}
+.orange { background-color: orange; }
+.yellow { background-color: yellow; }
+.blue { background-color: blue; }
+.emerald { background-color: #50c878; }
+.red { background-color: red; }
+.gray { background-color: gray; }
+.pink { background-color: pink; }
