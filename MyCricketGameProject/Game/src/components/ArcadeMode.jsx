@@ -1,4 +1,3 @@
-// arcademode.jsx
 "use client";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
@@ -56,17 +55,29 @@ export default function ArcadeGame() {
   useEffect(() => {
     let interval;
     if (!gameState.isGameOver && !gameState.isAnimating && gameState.isPointerMoving) {
+      const speedIntervals = {
+        FAST: 120,   // Slightly slower than 100ms for smoother cycling
+        MEDIUM: 200,
+        SLOW: 300,
+      };
+      const intervalTime = speedIntervals[gameState.ballSpeed] || 200;
+
       interval = setInterval(() => {
-        setGameState(prev => ({
-          ...prev,
-          pointerPosition: (prev.pointerPosition + 1) % scoreOptions.length
-        }));
-      }, 200);
+        setGameState(prev => {
+          const nextPosition = (prev.pointerPosition + 1) % scoreOptions.length;
+          // Optional: Log to debug pointer position
+          // console.log(`Speed: ${prev.ballSpeed}, Position: ${nextPosition}`);
+          return {
+            ...prev,
+            pointerPosition: nextPosition
+          };
+        });
+      }, intervalTime);
     }
     return () => {
       if (interval) clearInterval(interval);
     };
-  }, [gameState.isGameOver, gameState.isAnimating, gameState.isPointerMoving]);
+  }, [gameState.isGameOver, gameState.isAnimating, gameState.isPointerMoving, gameState.ballSpeed]);
 
   const initializeGame = () => {
     const ballsRemaining = Math.floor(Math.random() * 9) + 1;
@@ -95,10 +106,8 @@ export default function ArcadeGame() {
       isAnimating: true
     }));
 
-    //Process the selected score
     const selectedScore = scoreOptions[gameState.pointerPosition].value;
 
-    
     if (selectedScore === "W") {
       setTimeout(() => {
         setGameState(prev => ({
@@ -107,25 +116,25 @@ export default function ArcadeGame() {
           gameResult: "OUT! Game Over",
           isAnimating: false,
         }));
-      },300);
-        return;
-      }
+      }, 300);
+      return;
+    }
 
-      const newScore = gameState.currentScore + (selectedScore === "." ? 0 : Number(selectedScore));
-      const ballsLeft = gameState.ballsRemaining - 1;
+    const newScore = gameState.currentScore + (selectedScore === "." ? 0 : Number(selectedScore));
+    const ballsLeft = gameState.ballsRemaining - 1;
 
-      let result = "";
-      let gameOver = false;
+    let result = "";
+    let gameOver = false;
 
-      if (newScore >= gameState.targetScore) {
-        result = "Victory! You won!!!";
-        gameOver = true;
-      } else if (ballsLeft === 0) {
-        result = "Game Over! Target not reached";
-        gameOver = true;
-      }
+    if (newScore >= gameState.targetScore) {
+      result = "Victory! You won!!!";
+      gameOver = true;
+    } else if (ballsLeft === 0) {
+      result = "Game Over! Target not reached";
+      gameOver = true;
+    }
 
-      setTimeout(() => {
+    setTimeout(() => {
       setGameState(prev => ({
         ...prev,
         currentScore: newScore,
@@ -141,15 +150,13 @@ export default function ArcadeGame() {
 
   return (
     <div className="arcade-container">
-      <h1 className="match-heading">
-        {myTeam && opponentTeam ? `${myTeam.teamName} vs ${opponentTeam.teamName}` : "Loading Match..."}
-      </h1>
-
       <div className="header">
         <Link to="/">
           <button className="home-button">🏠 Home</button>
         </Link>
-        <div className="match-number">MATCH #{gameState.matchNumber}</div>
+        <h1 className="match-heading">
+          {myTeam && opponentTeam ? `${myTeam.teamName} vs ${opponentTeam.teamName}` : "Loading Match..."}
+        </h1>
         <div className="score-display">
           TEAM: {myTeam ? myTeam.teamName : "Unknown"} | SCORE: {gameState.currentScore}
         </div>
@@ -158,7 +165,19 @@ export default function ArcadeGame() {
       <div className="cricket-field">
         <div className="pitch">
           <div className="batsman" style={{ backgroundColor: myTeam ? myTeam.color : "#000" }} />
-          {gameState.isAnimating && <div className="ball-container"><div className="ball" /></div>}
+          {gameState.isAnimating && (
+            <div className="ball-container">
+              <div
+                className="ball"
+                style={{
+                  animationDuration:
+                    gameState.ballSpeed === "FAST" ? "0.3s" :
+                    gameState.ballSpeed === "MEDIUM" ? "0.5s" :
+                    "0.7s"
+                }}
+              />
+            </div>
+          )}
           <div className="bowler" style={{ backgroundColor: opponentTeam ? opponentTeam.color : "#fff" }} />
           {gameState.isGameOver && <div className="game-message">{gameState.gameResult}</div>}
         </div>
@@ -172,11 +191,12 @@ export default function ArcadeGame() {
       <div className="speed-indicator">{gameState.ballSpeed}</div>
 
       <div className="score-options-container" onClick={handlePointerStop}>
-        <div 
+        <div
           className="pointer"
           style={{
             left: `${(gameState.pointerPosition * 100) / scoreOptions.length}%`,
-            width: `${100 / scoreOptions.length}%`
+            width: `${100 / scoreOptions.length}%`,
+            transition: gameState.ballSpeed === "FAST" ? "left 0.1s ease-in-out" : "left 0.2s ease-in-out"
           }}
         />
         <div className="score-options">
