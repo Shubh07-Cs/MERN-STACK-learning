@@ -4,14 +4,14 @@ import { Link } from "react-router-dom";
 import "./ArcadeMode.css";
 
 const countries = [
-  { name: "India", color: "blue", teamName: "India" },
-  { name: "Pakistan", color: "green", teamName: "Pakistan" },
-  { name: "Australia", color: "yellow", teamName: "Australia" },
-  { name: "England", color: "skyblue", teamName: "England" },
-  { name: "New Zealand", color: "black", teamName: "New Zealand" },
-  { name: "West Indies", color: "maroon", teamName: "West Indies" },
-  { name: "South Africa", color: "darkgreen", teamName: "South Africa" },
-  { name: "Sri Lanka", color: "royalblue", teamName: "Sri Lanka" },
+  { name: "India", color: "blue", teamName: "INDIA" },
+  { name: "Pakistan", color: "green", teamName: "PAKISTAN" },
+  { name: "Australia", color: "yellow", teamName: "AUSTRALIA" },
+  { name: "England", color: "skyblue", teamName: "ENGLAND" },
+  { name: "New Zealand", color: "black", teamName: "NEW ZEALAND" },
+  { name: "West Indies", color: "maroon", teamName: "WEST INDIES" },
+  { name: "South Africa", color: "darkgreen", teamName: "SOUTH AFRICA" },
+  { name: "Sri Lanka", color: "royalblue", teamName: "SRI LANKA" },
 ];
 
 const scoreOptions = [
