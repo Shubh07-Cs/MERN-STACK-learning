@@ -4,14 +4,14 @@ import { Link } from "react-router-dom";
 import "./ArcadeMode.css";
 
 const countries = [
-  { name: "India", color: "blue", teamName: "INDIA" },
-  { name: "Pakistan", color: "green", teamName: "PAKISTAN" },
-  { name: "Australia", color: "yellow", teamName: "AUSTRALIA" },
-  { name: "England", color: "skyblue", teamName: "ENGLAND" },
-  { name: "New Zealand", color: "black", teamName: "NEW ZEALAND" },
-  { name: "West Indies", color: "maroon", teamName: "WEST INDIES" },
-  { name: "South Africa", color: "darkgreen", teamName: "SOUTH AFRICA" },
-  { name: "Sri Lanka", color: "royalblue", teamName: "SRI LANKA" },
+  { name: "India", color: "blue", teamName: "India" },
+  { name: "Pakistan", color: "green", teamName: "Pakistan" },
+  { name: "Australia", color: "yellow", teamName: "Australia" },
+  { name: "England", color: "skyblue", teamName: "England" },
+  { name: "New Zealand", color: "black", teamName: "NEw Zealand" },
+  { name: "West Indies", color: "maroon", teamName: "West Indies" },
+  { name: "South Africa", color: "darkgreen", teamName: "South Africa" },
+  { name: "Sri Lanka", color: "royalblue", teamName: "Sri Lanka" },
 ];
 
 const scoreOptions = [
@@ -65,8 +65,7 @@ export default function ArcadeGame() {
       interval = setInterval(() => {
         setGameState(prev => {
           const nextPosition = (prev.pointerPosition + 1) % scoreOptions.length;
-          // Optional: Log to debug pointer position
-          // console.log(`Speed: ${prev.ballSpeed}, Position: ${nextPosition}`);
+
           return {
             ...prev,
             pointerPosition: nextPosition
@@ -116,8 +115,17 @@ export default function ArcadeGame() {
           gameResult: "OUT! Game Over",
           isAnimating: false,
         }));
+        if (myTeam && opponentTeam) {
+          saveGameHistory({
+            myTeam: myTeam.teamName,
+            opponentTeam: opponentTeam.teamName,
+            targetScore: gameState.targetScore,
+            currentScore: gameState.currentScore, // No new runs added
+            ballsRemaining: gameState.ballsRemaining - 1,
+          });
+        }
       },
-       50);
+        50);
       return;
     }
 
@@ -146,7 +154,19 @@ export default function ArcadeGame() {
         ballSpeed: speeds[Math.floor(Math.random() * speeds.length)],
         isPointerMoving: !gameOver,
       }));
-    }, 50);
+
+      if (gameOver && myTeam && opponentTeam) {
+        saveGameHistory({
+          myTeam: myTeam.teamName,
+          opponentTeam: opponentTeam.teamName,
+          targetScore: gameState.targetScore,
+          currentScore: newScore,
+          ballsRemaining: ballsLeft,
+          gameResult: result,
+        });
+      }
+    },
+      50);
   };
 
   return (
@@ -167,21 +187,21 @@ export default function ArcadeGame() {
         <div className="pitch">
           <div className="batsman" style={{ backgroundColor: myTeam ? myTeam.color : "#000" }} />
           {gameState.isAnimating && (
-  <div className="ball-container">
-    <div
-      className="score-display-animation"
-      style={{
-        backgroundColor: scoreOptions[gameState.pointerPosition].color,
-        animationDuration:
-          gameState.ballSpeed === "FAST" ? "0.3s" :
-          gameState.ballSpeed === "MEDIUM" ? "0.5s" :
-          "0.7s"
-      }}
-    >
-      {scoreOptions[gameState.pointerPosition].value}
-    </div>
-  </div>
-)}
+            <div className="ball-container">
+              <div
+                className="score-display-animation"
+                style={{
+                  backgroundColor: scoreOptions[gameState.pointerPosition].color,
+                  animationDuration:
+                    gameState.ballSpeed === "FAST" ? "0.3s" :
+                      gameState.ballSpeed === "MEDIUM" ? "0.5s" :
+                        "0.7s"
+                }}
+              >
+                {scoreOptions[gameState.pointerPosition].value}
+              </div>
+            </div>
+          )}
 
 
           <div className="bowler" style={{ backgroundColor: opponentTeam ? opponentTeam.color : "#fff" }} />
