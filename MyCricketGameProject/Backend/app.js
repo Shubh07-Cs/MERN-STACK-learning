@@ -1,7 +1,7 @@
 require("dotenv").config();//integrated env file with process
 require("./config/dbConfig.js");//conneciting mongoose to MongoDB Atlas Database
 
-const PORT = process.env.PORT || 5173;
+const PORT = process.env.PORT || 7042;
 
 const express = require("express");
 const morgan = require("morgan");
@@ -32,9 +32,11 @@ app.get("/", (req, res) => {
     res.send("Server is working fine... ");
 })
 
+
+//this part is not working
 app.get("/game-history/last-three", async (req, res) => {
     try {
-        const lastGames = await User.find().sort({ _id: -1 }).limit(3);
+        const lastGames = await GameHistory.find().sort({ _id: -1 }).limit(5);
         res.status(200)
             .json({
                 success: true,
@@ -50,9 +52,10 @@ app.get("/game-history/last-three", async (req, res) => {
     }
 });
 
-
+//not working
 app.post("/game-history/save", async (req, res) => {
     try {
+        console.log(req.body);
         const { myTeam, opponentTeam, targetScore, currentScore, ballsRemaining } = req.body;
 
         const newGame = new GameHistory({ myTeam, opponentTeam, targetScore, currentScore, ballsRemaining });
@@ -64,6 +67,8 @@ app.post("/game-history/save", async (req, res) => {
             message: "Game history saved successfully!"
         });
     } catch (error) {
+        console.log(error.message);
+
         res.status(500)
         .json({
             success: false,

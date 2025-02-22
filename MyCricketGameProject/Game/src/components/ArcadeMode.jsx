@@ -3,6 +3,28 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./ArcadeMode.css";
 
+
+
+const saveGameHistory = async (gameData) => {
+  try {
+    const response = await fetch("http://localhost:7042/game-history/save", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(gameData),
+    });
+
+    const data = await response.json();
+    if (!data.success) {
+      console.error("Error saving game history:", data.message);
+    }
+  } catch (error) {
+    console.error("Error:", error);
+  }
+};
+
+
 const countries = [
   { name: "India", color: "blue", teamName: "India" },
   { name: "Pakistan", color: "green", teamName: "Pakistan" },
@@ -162,7 +184,6 @@ export default function ArcadeGame() {
           targetScore: gameState.targetScore,
           currentScore: newScore,
           ballsRemaining: ballsLeft,
-          gameResult: result,
         });
       }
     },
