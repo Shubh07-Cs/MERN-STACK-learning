@@ -261,7 +261,7 @@
 }
 
 .game-category-card::after {
-  content: "❤️";
+  /* content: ; */
   position: absolute;
   bottom: 10px;
   right: 10px;
